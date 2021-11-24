@@ -48,6 +48,7 @@ public class DMTokenGenerator {
                 }
                 logger.trace("Using private key for token generation (" + algorithm + ")");
                 byte[] token = calculateToken(apdu, key);
+                if (token.length >= 0x80) newData.write(0x81);
                 newData.write(token.length);
                 newData.write(token);
             }
